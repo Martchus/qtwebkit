@@ -428,7 +428,7 @@ GraphicsContext3D::GraphicsContext3D(GraphicsContext3D::Attributes attrs, HostWi
     , m_multisampleColorBuffer(0)
     , m_functions(0)
     , m_private(adoptPtr(new GraphicsContext3DPrivate(this, hostWindow, renderStyle)))
-    , m_compiler(isGLES2Compliant() ? SH_ESSL_OUTPUT : SH_GLSL_OUTPUT)
+    , m_compiler(isGLES2Compliant() ? SH_ESSL_OUTPUT : SH_GLSL_COMPATIBILITY_OUTPUT)
 {
     if (!m_private->m_surface || !m_private->m_platformContext) {
         LOG_ERROR("GraphicsContext3D: GL context creation failed.");
