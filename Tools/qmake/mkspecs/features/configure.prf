@@ -120,9 +120,9 @@ defineTest(finalizeConfigure) {
     }
 
     # Sanity checks that would prevent us from building the whole project altogether.
-    !config_icu:!osx:!use?(wchar_unicode) {
-       addReasonForSkippingBuild("ICU is required.")
-    }
+#    !config_icu:!osx:!use?(wchar_unicode) {
+#       addReasonForSkippingBuild("ICU is required.")
+#    }
     production_build:blackberry {
         addReasonForSkippingBuild("Build not supported on BB10.")
     }

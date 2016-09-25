@@ -580,8 +580,12 @@
 # define WTF_USE_WCHAR_UNICODE 1
 #endif
 
+#if OS(WINDOWS) && PLATFORM(QT)
+#define WTF_USE_QT4_UNICODE 1
+#else
 #if !USE(WCHAR_UNICODE)
 #define WTF_USE_ICU_UNICODE 1
+#endif
 #endif
 
 #if PLATFORM(MAC) && !PLATFORM(IOS)

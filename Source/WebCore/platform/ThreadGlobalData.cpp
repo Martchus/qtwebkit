@@ -38,6 +38,8 @@
 
 #if USE(ICU_UNICODE)
 #include "TextCodecICU.h"
+#elif USE(QT4_UNICODE)
+#include "qt/TextCodecQt.h"
 #endif
 
 #if PLATFORM(MAC)

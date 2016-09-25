@@ -27,7 +27,11 @@
 
 #include "TextBoundaries.cpp"
 #include "TextBreakIterator.cpp"
+#if USE(QT4_UNICODE)
+#include "TextBreakIteratorQt.cpp"
+#else
 #include "TextBreakIteratorICU.cpp"
+#endif
 #include "TextCodec.cpp"
 #include "TextCodecICU.cpp"
 #include "TextCodecLatin1.cpp"
@@ -35,6 +39,10 @@
 #include "TextCodecUTF8.cpp"
 #include "TextCodecUserDefined.cpp"
 #include "TextEncoding.cpp"
+#if USE(QT4_UNICODE)
+#include "TextEncodingDetectorNone.cpp"
+#else
 #include "TextEncodingDetectorICU.cpp"
+#endif
 #include "TextEncodingRegistry.cpp"
 #include "TextStream.cpp"
