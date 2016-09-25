@@ -100,7 +100,7 @@ static void makeCapitalized(String* string, UChar previous)
         return;
 
     unsigned length = string->length();
-    const StringImpl& stringImpl = *string->impl();
+    const UChar* characters = string->characters();
 
     if (length >= numeric_limits<unsigned>::max())
         CRASH();
@@ -109,29 +109,28 @@ static void makeCapitalized(String* string, UChar previous)
     stringWithPrevious[0] = previous == noBreakSpace ? ' ' : previous;
     for (unsigned i = 1; i < length + 1; i++) {
         // Replace &nbsp with a real space since ICU no longer treats &nbsp as a word separator.
-        if (stringImpl[i - 1] == noBreakSpace)
+        if (characters[i - 1] == noBreakSpace)
             stringWithPrevious[i] = ' ';
         else
-            stringWithPrevious[i] = stringImpl[i - 1];
+            stringWithPrevious[i] = characters[i - 1];
     }
 
     TextBreakIterator* boundary = wordBreakIterator(stringWithPrevious.characters(), length + 1);
     if (!boundary)
         return;
 
-    StringBuilder result;
-    result.reserveCapacity(length);
+    StringBuffer<UChar> data(length);
 
     int32_t endOfWord;
     int32_t startOfWord = textBreakFirst(boundary);
     for (endOfWord = textBreakNext(boundary); endOfWord != TextBreakDone; startOfWord = endOfWord, endOfWord = textBreakNext(boundary)) {
         if (startOfWord) // Ignore first char of previous string
-            result.append(stringImpl[startOfWord - 1] == noBreakSpace ? noBreakSpace : toTitleCase(stringWithPrevious[startOfWord]));
+            data[startOfWord - 1] = characters[startOfWord - 1] == noBreakSpace ? noBreakSpace : toTitleCase(stringWithPrevious[startOfWord]);
         for (int i = startOfWord + 1; i < endOfWord; i++)
-            result.append(stringImpl[i - 1]);
+            data[i - 1] = characters[i - 1];
     }
 
-    *string = result.toString();
+    *string = String::adopt(data);
 }
 
 RenderText::RenderText(Node* node, PassRefPtr<StringImpl> str)
