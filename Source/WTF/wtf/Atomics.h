@@ -68,6 +68,8 @@
 #elif !COMPILER(GCC)
 extern "C" void _ReadWriteBarrier(void);
 #pragma intrinsic(_ReadWriteBarrier)
+#else
+#include <intrin.h>
 #endif
 #include <windows.h>
 #elif OS(QNX)
