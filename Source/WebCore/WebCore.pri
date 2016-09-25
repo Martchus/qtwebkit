@@ -7,6 +7,12 @@
 
 SOURCE_DIR = $${ROOT_WEBKIT_DIR}/Source/WebCore
 
+equals(QT_ARCH, s390)|equals(QT_ARCH, arm)|equals(QT_ARCH, mips)|equals(QT_ARCH, i386)|equals(QT_ARCH, i686)|equals(QT_ARCH, x86_64) {
+    message("WebCore workaround for QtWebkit: do not build with -g, but with -g1")
+    QMAKE_CXXFLAGS -= -g
+    QMAKE_CXXFLAGS += -g1
+}
+
 QT *= network sql core-private gui-private
 
 WEBCORE_GENERATED_SOURCES_DIR = $${ROOT_BUILD_DIR}/Source/WebCore/$${GENERATED_SOURCES_DESTDIR}
@@ -316,6 +322,7 @@ mac {
 unix:!mac:*-g++*:QMAKE_CXXFLAGS += -fdata-sections
 unix:!mac:*-g++*:QMAKE_LFLAGS += -Wl,--gc-sections
 linux*-g++*:QMAKE_LFLAGS += $$QMAKE_LFLAGS_NOUNDEF
+win32:!equals(QT_ARCH, powerpc):!equals(QT_ARCH, s390):!equals(QT_ARCH, mips):!equals(QT_ARCH, arm):QMAKE_LFLAGS += -Wl,--no-keep-memory -Wl,--reduce-memory-overheads
 
 enable_fast_mobile_scrolling: DEFINES += ENABLE_FAST_MOBILE_SCROLLING=1
 
