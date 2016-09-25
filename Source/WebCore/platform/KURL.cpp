@@ -40,6 +40,8 @@
 
 #if USE(ICU_UNICODE)
 #include <unicode/uidna.h>
+#elif USE(QT4_UNICODE)
+#include <QUrl>
 #endif
 
 // FIXME: This file makes too much use of the + operator on String.
@@ -1496,6 +1498,9 @@ static void appendEncodedHostname(UCharBuffer& buffer, const UChar* str, unsigne
         hostnameBufferLength, UIDNA_ALLOW_UNASSIGNED, 0, &error);
     if (error == U_ZERO_ERROR)
         buffer.append(hostnameBuffer, numCharactersConverted);
+#elif USE(QT4_UNICODE)
+    QByteArray result = QUrl::toAce(String(str, strLen));
+    buffer.append(result.constData(), result.length());
 #endif
 }
 

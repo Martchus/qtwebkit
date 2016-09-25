@@ -37,6 +37,8 @@
 
 #if USE(ICU_UNICODE)
 #include <unicode/unorm.h>
+#elif USE(QT4_UNICODE)
+#include <QString>
 #endif
 
 namespace WebCore {
@@ -101,6 +103,10 @@ CString TextEncoding::encode(const UChar* characters, size_t length, Unencodable
         sourceLength = normalizedLength;
     }
     return newTextCodec(*this)->encode(source, sourceLength, handling);
+#elif USE(QT4_UNICODE)
+    QString str(reinterpret_cast<const QChar*>(characters), length);
+    str = str.normalized(QString::NormalizationForm_C);
+    return newTextCodec(*this)->encode(reinterpret_cast<const UChar *>(str.utf16()), str.length(), handling);
 #elif OS(WINDOWS) && USE(WCHAR_UNICODE)
     // normalization will be done by Windows CE API
     OwnPtr<TextCodec> textCodec = newTextCodec(*this);

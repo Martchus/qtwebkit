@@ -30,6 +30,8 @@ typedef unsigned char LChar;
 
 #if USE(ICU_UNICODE)
 #include <wtf/unicode/icu/UnicodeIcu.h>
+#elif USE(QT4_UNICODE)
+#include "qt4/UnicodeQt4.h"
 #elif USE(WCHAR_UNICODE)
 #include <wtf/unicode/wchar/UnicodeWchar.h>
 #else
