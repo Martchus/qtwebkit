@@ -35,13 +35,14 @@
 #include "GLSLANG/ShaderLang.h"
 #else
 #include "ShaderLang.h"
+#include "angle_gl.h"
 #endif
 
 namespace WebCore {
 
 enum ANGLEShaderType {
-    SHADER_TYPE_VERTEX = SH_VERTEX_SHADER,
-    SHADER_TYPE_FRAGMENT = SH_FRAGMENT_SHADER,
+    SHADER_TYPE_VERTEX = GL_VERTEX_SHADER,
+    SHADER_TYPE_FRAGMENT = GL_FRAGMENT_SHADER,
 };
 
 enum ANGLEShaderSymbolType {
@@ -53,24 +54,24 @@ struct ANGLEShaderSymbol {
     ANGLEShaderSymbolType symbolType;
     String name;
     String mappedName;
-    ShDataType dataType;
+    sh::GLenum dataType;
     int size;
     bool isArray;
 
     bool isSampler() const
     {
         return symbolType == SHADER_SYMBOL_TYPE_UNIFORM
-            && (dataType == SH_SAMPLER_2D
-            || dataType == SH_SAMPLER_CUBE
-            || dataType == SH_SAMPLER_2D_RECT_ARB
-            || dataType == SH_SAMPLER_EXTERNAL_OES);
+            && (dataType == GL_SAMPLER_2D
+            || dataType == GL_SAMPLER_CUBE
+            || dataType == GL_SAMPLER_2D_RECT_ARB
+            || dataType == GL_SAMPLER_EXTERNAL_OES);
     }
 };
 
 class ANGLEWebKitBridge {
 public:
 
-    ANGLEWebKitBridge(ShShaderOutput = SH_GLSL_OUTPUT, ShShaderSpec = SH_WEBGL_SPEC);
+    ANGLEWebKitBridge(ShShaderOutput = SH_GLSL_COMPATIBILITY_OUTPUT, ShShaderSpec = SH_WEBGL_SPEC);
     ~ANGLEWebKitBridge();
     
     ShBuiltInResources getResources() { return m_resources; }
