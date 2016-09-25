@@ -7,6 +7,12 @@
 
 SOURCE_DIR = $${ROOT_WEBKIT_DIR}/Source/JavaScriptCore
 
+#equals(QT_ARCH, s390)|equals(QT_ARCH, arm)|equals(QT_ARCH, mips)|equals(QT_ARCH, i386)|equals(QT_ARCH, i686)|equals(QT_ARCH, x86_64) {
+#    message("JavaScriptCore workaround for QtWebkit: do not build with -g, but with -g1")
+#    QMAKE_CXXFLAGS -= -g
+#    QMAKE_CXXFLAGS += -g1
+#}
+
 JAVASCRIPTCORE_GENERATED_SOURCES_DIR = $${ROOT_BUILD_DIR}/Source/JavaScriptCore/$${GENERATED_SOURCES_DESTDIR}
 
 INCLUDEPATH += \

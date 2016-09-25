@@ -8,6 +8,12 @@
 # All external modules should include WTF headers by prefixing with "wtf" (#include <wtf/some/thing.h>).
 INCLUDEPATH += $$PWD
 
+#equals(QT_ARCH, s390)|equals(QT_ARCH, arm)|equals(QT_ARCH, mips)|equals(QT_ARCH, i386)|equals(QT_ARCH, i686)|equals(QT_ARCH, x86_64) {
+#    message("WTF workaround for QtWebkit: do not build with -g, but with -g1")
+#    QMAKE_CXXFLAGS -= -g
+#    QMAKE_CXXFLAGS += -g1
+#}
+
 mac {
     # Mac OS does ship libicu but not the associated header files.
     # Therefore WebKit provides adequate header files.
