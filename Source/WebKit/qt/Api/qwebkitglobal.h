@@ -24,7 +24,6 @@
 #include <QtCore/qglobal.h>
 #include <QtCore/qstring.h>
 
-#ifndef QT_STATIC
 #  if !defined(QT_BUILD_WEBKITWIDGETS_LIB) && defined(BUILDING_WEBKIT)
 #      define QWEBKIT_EXPORT Q_DECL_EXPORT
 #  else
@@ -35,10 +34,6 @@
 #  else
 #      define QWEBKITWIDGETS_EXPORT Q_DECL_IMPORT
 #  endif
-#else
-#  define QWEBKITWIDGETS_EXPORT
-#  define QWEBKIT_EXPORT
-#endif
 
 QWEBKIT_EXPORT QString qWebKitVersion();
 QWEBKIT_EXPORT int qWebKitMajorVersion();
