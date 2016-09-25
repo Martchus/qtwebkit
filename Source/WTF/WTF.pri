@@ -14,7 +14,7 @@ mac {
     INCLUDEPATH = $${ROOT_WEBKIT_DIR}/Source/WTF/icu $$INCLUDEPATH
     LIBS += -licucore
 } else:!use?(wchar_unicode): {
-    win32 {
+    win32:!mingw {
         CONFIG(static, static|shared) {
             CONFIG(debug, debug|release) {
                 LIBS += -lsicuind -lsicuucd -lsicudtd
