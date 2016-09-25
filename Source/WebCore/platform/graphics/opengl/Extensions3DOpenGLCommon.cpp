@@ -172,10 +172,10 @@ String Extensions3DOpenGLCommon::getTranslatedShaderSourceANGLE(Platform3DObject
 
     String translatedShaderSource;
     String shaderInfoLog;
-    int extraCompileOptions = SH_MAP_LONG_VARIABLE_NAMES | SH_CLAMP_INDIRECT_ARRAY_BOUNDS;
+    int extraCompileOptions = SH_CLAMP_INDIRECT_ARRAY_BOUNDS;
 
     if (m_requiresBuiltInFunctionEmulation)
-        extraCompileOptions |= SH_EMULATE_BUILT_IN_FUNCTIONS;
+        extraCompileOptions |= SH_EMULATE_ABS_INT_FUNCTION;
 
     Vector<ANGLEShaderSymbol> symbols;
     bool isValid = compiler.compileShaderSource(entry.source.utf8().data(), shaderType, translatedShaderSource, shaderInfoLog, symbols, extraCompileOptions);
