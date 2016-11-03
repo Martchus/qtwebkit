@@ -119,16 +119,6 @@ QWebFrameAdapter* QWebFramePrivate::createChildFrame(QWebFrameData* frameData)
     return newFrame->d;
 }
 
-QWebFrame *QWebFramePrivate::apiHandle()
-{
-    return q;
-}
-
-QObject *QWebFramePrivate::handle()
-{
-    return q;
-}
-
 void QWebFramePrivate::contentsSizeDidChange(const QSize &size)
 {
     emit q->contentsSizeChanged(size);
