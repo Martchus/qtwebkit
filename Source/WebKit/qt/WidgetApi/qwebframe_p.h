@@ -49,8 +49,8 @@ public:
     static QWebFrame* kit(const QWebFrameAdapter*);
 
     // Adapter implementation
-    virtual QWebFrame* apiHandle() OVERRIDE;
-    virtual QObject* handle() OVERRIDE;
+    virtual QWebFrame* apiHandle() OVERRIDE { return q; }
+    virtual QObject* handle() OVERRIDE { return q; }
     virtual void contentsSizeDidChange(const QSize &) OVERRIDE;
     virtual int scrollBarPolicy(Qt::Orientation) const OVERRIDE;
     virtual void emitUrlChanged() OVERRIDE;
