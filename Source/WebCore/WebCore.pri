@@ -216,7 +216,7 @@ use?(3D_GRAPHICS) {
     win32: {
         mingw: {
             # Make sure OpenGL libs are after the webcore lib so MinGW can resolve symbols
-            contains(QT_CONFIG, opengles2) {
+            contains(QT_CONFIG, opengles2)|contains(QT_CONFIG, dynamicgl) {
                 CONFIG(debug, debug|release):contains(QT_CONFIG, angle) {
                     LIBS += $$QMAKE_LIBS_OPENGL_ES2_DEBUG
                 } else {
