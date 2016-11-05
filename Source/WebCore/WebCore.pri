@@ -216,14 +216,11 @@ use?(3D_GRAPHICS) {
     win32: {
         mingw: {
             # Make sure OpenGL libs are after the webcore lib so MinGW can resolve symbols
-            qtConfig(opengles2) {
-                CONFIG(debug, debug|release):qtConfig(angle) {
-                    LIBS += $$QMAKE_LIBS_OPENGL_ES2_DEBUG
-                } else {
-                    LIBS += $$QMAKE_LIBS_OPENGL_ES2
-                }
+            CONFIG(debug, debug|release):qtConfig(angle) {
+                LIBS += $$QMAKE_LIBS_OPENGL_ES2_DEBUG
             } else {
-                LIBS += $$QMAKE_LIBS_OPENGL
+                # Always link against ANGLE
+                LIBS += $$QMAKE_LIBS_OPENGL_ES2
             }
         }
     } else {
