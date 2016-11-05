@@ -18,12 +18,6 @@ JavaScriptCore.file = Source/JavaScriptCore/JavaScriptCore.pro
 JavaScriptCore.makefile = Makefile.JavaScriptCore
 SUBDIRS += JavaScriptCore
 
-use?(3D_GRAPHICS) {
-    ANGLE.file = Source/ThirdParty/ANGLE/ANGLE.pro
-    ANGLE.makefile = Makefile.ANGLE
-    SUBDIRS += ANGLE
-}
-
 use?(leveldb):!use?(system_leveldb) {
     leveldb.file = Source/ThirdParty/leveldb/leveldb.pro
     leveldb.makefile = Makefile.leveldb
